@@ -73,13 +73,14 @@ public class MaterialUtil {
 	
 	private static String getMobEggType(ItemStack item)
 	{
-		String type = "";
+		String type = "Unknown";
+		if(item == null) return type;
 		try 
 		{
 			if(VersionUtil.getVersion().contains("1_8"))
 			{
-				String entityType = EntityType.fromId(item.getDurability()).getName();
-				type = (Character.toUpperCase(entityType.charAt(0)) + entityType.toLowerCase().substring(1)).replace("_", "");
+				EntityType entityType = EntityType.fromId(item.getDurability());
+				if(type != null) type = (Character.toUpperCase(entityType.name().charAt(0)) + entityType.name().toLowerCase().substring(1)).replace("_", "");
 			}
 			else //Should work for 1.9 and above, needs to be tested
 			{
